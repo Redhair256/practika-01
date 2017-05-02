@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+		<meta charset="utf-8">
+		<title>01. Подготовка локальной среды разработки</title>
+	</head>
+	<body class="container">
+		<h1>Подготовка локальной среды разработки Windows</h1>
+ 
+		<p>Для подготовки локальной среды потребуется следующее ПО:</p>
+		<ul>
+			<li><a target="_blank" target="_blank" href="https://www.apachefriends.org/ru/index.html"><strong>XAMPP</strong></a> - пакет, включающий веб-сервер Apache, базу данных MariaDB (ветка MySQL), интерпретатор PHP и утилиту управления базой данных phpMyAdmin.</li>
+			<li><a target="_blank" target="_blank" href="https://git-for-windows.github.io/"><strong>Git For Windows</strong></a> - пакет, включающий в себя систему управления версиями Git и Bash-терминал для Windows.</li>
+			<li><a target="_blank" target="_blank" href="https://www.sublimetext.com/"><strong>Sublime Text</strong></a> - редактор кода (можно использовать любой другой).</li>
+			<li><a target="_blank" target="_blank" href="https://getcomposer.org/"><strong>Composer</strong></a> - пакетный менеджер PHP.</li>
+		</ul>
+
+		<h3></a>Установка и настройка локального сервера на Windows</h3>
+
+		<p>
+			Для начала необходимо скачать и установить XAMPP. После установки нужно запустить <strong>Apache</strong> и <strong>MariaDB</strong> через <strong>панель управления XAMPP</strong> и перейти на <a target="_blank" href="http://localhost/">http://localhost/</a> или <a target="_blank" href="http://127.0.0.1">http://127.0.0.1</a> - должна открыться страница установленного веб-сервера.
+		</p>
+		<blockquote>
+			<p>
+				Адрес <strong>localhost</strong> является псевдонимом для внутреннего IP-адреса вашего компьютера - <strong>127.0.0.1</strong>.
+			</p>
+		</blockquote>
+		<p>
+			Страница, которую вы увидите по этим ссылкам, находится в <strong>корне веб-сервера</strong>, который по умолчанию находится в <strong>C:/xampp/htdocs</strong> (зависит от указанной папки во время установки XAMPP). Все, что будет размещено в этой папке, будет доступно по ссылкам <a target="_blank" href="http://localhost/">http://localhost/</a> и <a target="_blank" href="http://127.0.0.1">http://127.0.0.1</a>.
+		</p>
+		<p>
+			Теперь нужно убедиться, что PHP-интерпретатор установлен правильно и работает. Для этого нужно создать файл с расширением <strong>.php</strong> и записать в него следующий код:
+		</p>
+<pre>
+&lt;?php
+
+echo 'Hello, world!';
+</pre>
+		<p>
+			Далее, этот файл нужно переместить в <strong>корень веб-сервера</strong> и перейти на него по ссылке - <a target="_blank" href="http://localhost/%D0%BF%D1%83%D1%82%D1%8C%20%D0%BA%20%D1%84%D0%B0%D0%B9%D0%BB%D1%83.php">http://localhost/путь к файлу.php</a>. Если откроется страница с надписью “Hello, world!” <strong>без открывающего тэга</strong> <code>&lt;?php</code>, значит все работает правильно.
+		</p>
+		<blockquote>
+			<p>
+				Использование закрывающего тэга <code>?&gt;</code> в конце программы <strong>не обязательно и может приводить к нежелательным результатам</strong>. Об этом написано в <a target="_blank" href="http://php.net/manual/ru/language.basic-syntax.phptags.php">документации PHP</a>.
+			</p>
+		</blockquote>
+		<p>
+			В первых задачах мы не будем использовать базу данных, но стоит проверить ее работоспособность уже сейчас. Для этого нужно перейти на <a target="_blank" href="http://localhost/phpmyadmin">http://localhost/phpmyadmin</a>. Если все установлено правильно, то отобразится интерфейс управления базами данных.
+		</p>
+		<blockquote>
+			<p>
+				<strong>phpMyAdmin</strong> - один из самых простых и распространенных интерфейсов управления базами данных MySQL и MariaDB. Он установлен <strong>практически у всех хостинг-провайдеров</strong> и в большинстве случаев  именно с ним придется работать на настоящих <strong>shared-серверах</strong>. Если по каким-либо причинам <strong>phpMyAdmin</strong> не устраивает, то можно использовать другой софт: <a target="_blank" href="http://www.heidisql.com/"><strong>HeidiSQL</strong></a>, <a target="_blank" href="https://www.navicat.com/ru/"><strong>Navicat</strong></a>, <a target="_blank" href="https://www.webyog.com/product/sqlyog"><strong>SQLyog</strong></a> и другие.
+			</p>
+		</blockquote>
+
+		<h3>Установка Git For Windows</h3>
+
+		<p>
+			Т.к. стандартной утилиты <strong>cmd.exe</strong> операционной системы Windows недостаточно для полноценного ведения разработки, нужно установить более продвинутый терминал - <strong>git bash</strong>. Он позволит работать с файловой системой и выполнять команды так, как будто мы работаем на Linux. Утилита <strong>git bash</strong> входит в пакет <a target="_blank" href="https://git-for-windows.github.io/"><strong>Git For Windows</strong></a>. Так же, в этот пакет входит и система управления версиями <strong>git</strong>, которая понадобится нам в будущем.
+		</p>
+		<blockquote>
+			<p>
+				В <strong>git bash</strong> пути файловой системы Windows в виде “C://xampp/htdocs” <strong>будут недоступны</strong>. Для того, чтобы перемещаться по файловой системе Windows с помощью <strong>git bash</strong>, нужно будет использовать Linux-эквиваленты путей - “/c/xampp/htdocs”.
+			</p>
+		</blockquote>
+
+		<h3>Установка редактора кода</h3>
+
+		<p>
+			Как правило, для разных по величине проектов используют разные редакторы кода. Мы не будем писать большие проекты, поэтому подойдет любой простой редактор, например <strong>Sublime Text</strong> или <strong>Notepad++</strong>.
+		</p>
+
+		<h3>
+			Установка пакетного менеджера Composer
+		</h3>
+		<p>
+			Во многих проектах нет смысла изобретать свои инструменты, а можно использовать уже готовые компоненты (зависимости), которые были созданы другими разработчиками. Например, для реализации задачи, где нужно получить данные из MS Excel файла, необязательно создавать свой инструмент считывания файлов в .xls формате, а можно использовать уже готовую библиотеку <a target="_blank" href="https://github.com/PHPOffice/PHPExcel"><strong>PHPExcel</strong></a>. Для этого достаточно просто скачать файл этой библиотеки, и положить в папку с проектом, но если проект разрабатывается несколькими людьми и компонентов много, управлять таким проектом становится сложнее.
+		</p>
+		<p>
+			Для таких случаев были созданы <strong>пакетные менеджеры</strong>. С их помощью можно <strong>вести учет сторонних компонентов</strong>, использованных в проекте, <strong>устанавливать новые компоненты прямо из терминала</strong>, <strong>обновлять</strong> и <strong>удалять</strong> их.
+		</p>
+		<blockquote>
+			<p>
+				Одним из распространенных примеров пакетного менеджера является <strong>apt-get</strong> в Linux.
+			</p>
+		</blockquote>
+		<p>
+			В мире PHP основным пакетным менеджером является <strong>Composer</strong>. Мы будем использовать его для управления зависимостями в наших проектах. Инструкцию по установке можно прочитать на <a target="_blank" href="https://getcomposer.org"><strong>официальном сайте</strong></a>. После установки нужно убедиться, что все работает правильно. Для этого нужно запустить <strong>git bash</strong> и вызвать следующую команду:
+		</p>
+<pre>
+$ composer --version
+</pre>
+		<p>
+			В ответ терминал должен выдать версию установленного <strong>Composer</strong>.
+		</p>
+<pre>
+$ composer --version
+Composer version 1.4.1 2017-03-10 09:29:45
+</pre>
+
+		<h3>Система управления версиями Git</h3>
+
+		<p>
+			Разработчик всегда <strong>должен делать резервные копии</strong>. Любое более-менее серьезное изменение кода в проекте означает, что проект нужно сохранить, желательно оставив предыдущую копию на случай отката. Если работу над проектом ведут несколько разработчиков одновременно, то после каждого изменения нужно разослать свежую версию проекта всем участникам, каждый из которых уже мог внести свои изменения в код предыдущей редакции, т.е. имеет свою свежую версию. Когда в команде всего пару человек, все это можно сделать вручную, собравшись у одного компьютера и обсудив все внесенные изменения. Но что делать, если в команде 10 программистов? Или 20?
+		</p>
+		<p>
+			Для решения этой проблемы существуют системы управления версиями. Они используются в <strong>абсолютно каждой компании, которая занимается командной разработкой ПО</strong>. В нашей работе мы будем использовать <a target="_blank" href="https://ru.wikipedia.org/wiki/Git"><strong>Git</strong></a>, а хранить проекты будем на <a target="_blank" href="http://github.com"><strong>GitHub</strong></a>.
+		</p>
+
+		<h1>Практическое задание</h1>
+
+		<p>
+			Для начала необходимо зарегистрироваться на сайте <a target="_blank" href="http://github.com"><strong>GitHub</strong></a> и создать репозиторий для проекта под названием “praktika-01”. После того, как <strong>удаленный репозиторий</strong> создан, нужно создать <strong>локальный репозиторий</strong>.
+		</p>
+<pre>
+# Перейти в корень веб-сервера
+$ cd /c/xampp/htdocs 
+# Создать директорию praktika-01
+$ mkdir praktika-01
+# Перейти в директорию praktika-01
+$ cd praktika-01
+# Инициализировать локальный репозиторий
+$ git init
+</pre>
+		<p>
+			После выполнения терминал покажет сообщение об успешной инициализации репозитория:
+		</p>
+<pre>
+$ git init
+Initialized empty Git repository in c:/xampp/htdocs/praktika-01/.git/
+</pre>
+		<p>
+			Теперь нужно привязать <strong>локальный репозиторий</strong> к <strong>удаленному</strong>:
+		</p>
+<pre>
+$ git remote add origin https://github.com/имя учетной записи/praktika-01.git
+</pre>
+		<p>
+			Далее, нужно скопировать файлы из архива с первым заданием практики в папку C://xampp/htdocs/praktika-01. После того, как файлы скопированы, нужно информировать Git о появлении новых файлов в <strong>локальном репозитории</strong> и добавить эти файлы в <strong>список отслеживаемых</strong>:
+		</p>
+<pre>
+$ git add . -A
+</pre>
+		<p>
+			После этого стоит убедиться, что Git увидел изменения:
+		</p>
+<pre>
+$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   assets/img/example.png &lt;- Git видит новый файл example.png
+	new file:   index.html # &lt;- Git видит новый файл index.html
+</pre>
+		<p>
+			Теперь нужно создать первый коммит проекта и дать ему краткое описание:
+		</p>
+<pre>
+# Создать коммит с описанием "Init."
+git commit -m "Init."
+[master (root-commit) 6882476] Init.
+1 file changed, 0 insertions(+), 0 deletions(-)
+  create mode 100644 assets/img/example.png
+  create mode 100644 index.html
+</pre>
+		<p>
+			Описание должно быть такое, чтобы другие разработчики могли его понять:
+		</p>
+		<p>
+			Хорошие примеры описаний:
+		</p>
+		<ul>
+			<li>“Исправил баг в системе регистрации, теперь дата рождения пользователя указывается правильно”</li>
+			<li>“Добавил новый компонент Doctrine, переписал все запросы в базу”</li>
+		</ul>
+		<p>
+			Плохие примеры:
+		</p>
+		<ul>
+			<li>“qwertyasdas123”</li>
+			<li>“Чё-то глючило, чё-то исправил”</li>
+		</ul>
+		<p>
+			Теперь можно отправить изменения в <strong>удаленный репозиторий</strong>:
+		</p>
+<pre>
+$ git push -u origin master
+</pre>
+		<blockquote>
+			<p>
+				<strong>Git</strong> может потребовать имя учетной записи <strong>GitHub</strong> и пароль к ней.
+			</p>
+		</blockquote>
+		<p>
+			После выполнения файлы <strong>локального репозитория</strong> будут загружены в <strong>удаленный репозиторий</strong> и другие разработчики смогут скачать проект вызвав следующую команду:
+		</p>
+<pre>
+$ git clone https://github.com/имя учетной записи/praktika-01.git
+</pre>
+		<p>
+			После того, как репозиторий будет склонирован, в директории, где была вызвана эта команда, появится папка praktika-01 со всеми файлами проекта.
+		</p>
+		<p>
+			Теперь нужно внести изменения в файл index.html. Сейчас весь контент этого файла растянут по всей ширине окна браузера и нет абсолютно никакой стилизации - читать такой контент не очень удобно и выглядит он тоже не очень красиво, поэтому это нужно исправить. В клиентской части наших проектов мы будем использовать фреймворк <a target="_blank" href="http://getbootstrap.com"><strong>Bootstrap</strong></a>, в котором уже есть заготовленные классы стилей, в т.ч. и класс, который ограничивает ширину элемента и располагает его посередине экрана - <code>.container</code>. Для того, чтобы использовать этот класс, нужно сначала установить зависимость <strong>Bootstrap</strong> в наш проект и подключить ее стили в файле index.html.
+		</p>
+		<blockquote>
+			<p>
+				<strong>Twitter Bootstrap</strong> - простой HTML, CSS и Javascript фреймворк для более быстрой и удобной web-разработки.
+			</p>
+		</blockquote>
+		<p>
+			Сначала инициализируем проект <strong>Composer</strong> в папке с проектом:
+		</p>
+<pre>
+$ composer init
+</pre>
+		<p>
+			После того, как проект инициализирован, нужно установить <strong>Bootstrap</strong> в проект. Информацию по подключению можно найти в <a target="_blank" href="http://getbootstrap.com/getting-started/"><strong>инструкции по установке Bootstrap</strong></a>. После установки в папке с проектом появится директория vendor, внутри которой можно будет найти все файлы фреймворка.
+		</p>
+		<p>
+			По завершению установки нужно подключить <strong>локальный</strong> файл bootstrap.min.css в файле index.html.
+		</p>
+		<p>
+			Если файл подключен верно, то при просмотре index.html в браузере будет видно, что изменился шрифт, появилась стилизация. Если же изменений не видно, то стоит проинспектировать файл на консольные ошибки с помощью <a target="_blank" href="https://developer.chrome.com/devtools"><strong>Chrome Developer Tools</strong></a> или аналогичного инструмента, который установлен в вашем браузере. Скорее всего, неверно указан путь к файлу bootstrap.min.css.
+		</p>
+		<p>
+			Теперь осталось ограничить ширину контента и расположить его посередине экрана. Для этого нужно применить класс <code>.container</code> к элементу <code>body</code>.
+		</p>
+		<p>
+			После этого index.html в браузере должен выглядеть следующим образом:
+		</p>
+		<p>
+			<img class="thumbnail img-responsive" src="assets/img/example.png" alt="">
+		</p>
+		<p>
+			Все новые изменения нужно отобразить в <strong>удаленном</strong> репозитории, чтобы другие разработчики могли обновить свои <strong>локальные</strong> копии проекта. Для этого, нужно добавить новые файлы в список отслеживаемых файлов <strong>Git</strong>:
+		</p>
+<pre>
+$ git add . -A
+</pre>
+		<p>
+			Проверим, какие изменения увидел <strong>Git</strong>:
+		</p>
+<pre>
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   .gitignore
+	new file:   composer.json
+	new file:   composer.lock
+	modified:   index.html
+</pre>
+		<p>
+			В этом сообщении видно, что <strong>Git</strong> распознал 3 новых файла - .gitignore, composer.json и composer.lock, а так же заметил изменения в файле index.html.
+		</p>
+		<blockquote>
+			<p>
+				Директория vendor и ее содержимое <strong>Git</strong> не отслеживает, потому что путь к ней добавлен в файл <strong>.gitignore</strong>. Этот файл был автоматически создан в процессе инициализации проекта <strong>Composer</strong> и предназначен для того, чтобы игнорировать отдельные файлы и/или директории.
+			</p>
+		</blockquote>
+		<p>
+			Далее, нужно создать новый коммит из изменений:
+		</p>
+<pre>
+$ git commit -m "Добавил зависимость Bootstrap, подключил его стили в index.html и изменил внешний вид."
+</pre>
+		<p>
+			Теперь применяем изменения к <strong>удаленному репозиторию</strong>:
+		</p>
+<pre>
+$ git push -u origin master
+</pre>
+		<p>
+			Изменения отразятся в <strong>удаленном репозитории</strong> и другие разработчики смогут получить их вызвав следующую команду в директории проекта:
+		</p>
+<pre>
+$ git pull
+</pre>
+		<p>
+			Т.к. директория vendor была добавлена в .gitignore, ее содержимое разработчики получить не смогут. Но, они получат файл проекта <strong>Composer</strong> - composer.json, где указаны зависимости проекта, и смогут установить их вызовом следующей команды:
+		</p>
+<pre>
+$ composer install
+</pre>
+		<p>
+			Или:
+		</p>
+<pre>
+$ composer update
+</pre>
+		<div class="jumbotron text-center">
+			<h1>Задача выполнена!</h1>
+			<p>
+				На этом этапе задачу можно считать выполненной. В качестве результата ожидается <strong>ссылка на репозиторий GitHub</strong> со всеми изменениями.
+			</p>
+		</div>
+	</body>
+</html>
